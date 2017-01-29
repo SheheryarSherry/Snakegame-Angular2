@@ -163,7 +163,14 @@ export class AppComponent implements OnInit {
 	}
 
 	setBoard(): void {
-		
+		this.board=[];
+
+		for(var i = 0; i < this.BOARD_SIZE; i++) {
+			this.board[i]=[];
+			for (var j = 0; j < this.BOARD_SIZE; j++) {
+				this.board[i][j] = false;
+			}
+		}
 	}
 
 }
