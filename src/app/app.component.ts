@@ -173,4 +173,25 @@ export class AppComponent implements OnInit {
 		}
 	}
 
+	newGame(): void{
+		if (this.gameStarted) return;
+		this.newBestScore=false;
+		this.gameStarted=true;
+		this.score = 0;
+		this. tempDirection = this.CONTROLS.LEFT;
+		this.isGameOver = false;
+		this.interval= 150;
+		this.snake= {
+			direction: this.CONTROLS.LEFT,
+			parts: []
+		};
+
+		for (var i = 0; i < 3; i++) {
+			this.snake.parts.push({x: 10 + i, y: 10});
+		}
+
+		this.resetFruit();
+		this.updatepositions();
+	}
+
 }
