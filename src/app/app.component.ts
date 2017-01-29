@@ -106,5 +106,16 @@ export class AppComponent implements OnInit {
 		}
 		return newHead;
 	}
-	
+
+	boardcollision(part: any): any{
+		return part.x === this.BOARD_SIZE || part.x === -1 || part.y === this.BOARD_SIZE || part.y === -1;
+	}
+
+	selfcollision(part: any): any {
+		return this.board[part.y][part.x] === true;
+	}
+
+	fruitcollision(part: any): any{
+		return part.x === this.fruit.x && part.y === this.fruit.y;
+	}
 }
