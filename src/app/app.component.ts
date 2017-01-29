@@ -118,4 +118,19 @@ export class AppComponent implements OnInit {
 	fruitcollision(part: any): any{
 		return part.x === this.fruit.x && part.y === this.fruit.y;
 	}
+
+	resetFruit(): void{
+		var x = Math.floor(Math.random() * this.BOARD_SIZE);
+		var y = Math.floor(Math.random() * this.BOARD_SIZE);
+
+		if (this.board[y][x] === true) {
+			return this.resetFruit();
+		}
+
+		this.fruit={
+			x: x,
+			y: y,
+		};
+	}
+	
 }
