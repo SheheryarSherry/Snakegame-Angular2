@@ -90,6 +90,25 @@ export class AppComponent implements OnInit {
 		return this.COLORS.BOARD;
 	}
 	updatepositions(): void {
+		let newHead = this.repositionHead();
+		let me = this;
+
+		if (this.boardcollision(newHead) || this.selfcollision(newHead)){
+			return this.gameover();
+		}else if (this.fruitcollision(newHead)){
+			this.eatFruit();
+		}
+		let oldTail = this.snake.parts.pop();
+		this.board[oldTail.y][oldTail.x] = false;
+
+		this.snake.parts.unshift(newHead);
+		this.board[newHead.y][newHead.x] = true;
+
+		this.snake.direction = this.tempDirection;
+
+		setTimeout(function() {
+		me.updatepositions();
+		}, this.interval);
 		
 	}
 	repositionHead():any{
