@@ -132,5 +132,17 @@ export class AppComponent implements OnInit {
 			y: y,
 		};
 	}
-	
+	eatFruit():void {
+		this.score++;
+
+		let tail = Object.assign({},this.snake.parts[this.snake.parts.length-1]);
+
+		this.snake.parts.push(tail);
+		this.resetFruit();
+
+		if (this.score % 5 == 0){
+			this.interval -= 15;
+		}
+	}
+
 }
