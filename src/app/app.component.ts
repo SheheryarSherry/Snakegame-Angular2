@@ -73,7 +73,22 @@ export class AppComponent implements OnInit {
 			this.tempDirection= this.CONTROLS.DOWN;
 		}
 	}
+	setColors(col:number,row:number): any{
+		if(this.isGameOver){
+			return this.COLORS.GAME_OVER;
 
-	
+		}else if (this.fruit.x==row && this.fruit.y == col){
+			return this.COLORS.FRUIT;
+
+		}else if(this.snake.parts[0].x == row && this.snake.parts[0].y==col){
+			return this.COLORS.HEAD;
+
+		}else if (this.board[col][row]==true){
+			return this.COLORS.BODY;
+		}
+
+		return this.COLORS.BOARD;
+	}
+
 
 }
