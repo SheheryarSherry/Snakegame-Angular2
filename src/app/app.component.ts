@@ -145,4 +145,25 @@ export class AppComponent implements OnInit {
 		}
 	}
 
+	gameover(): void {
+		this.isGameOver = true;
+		this.gameStarted = false;
+		let me = this;
+
+		if (this.score > this.best_score){
+			this.bestScoreService.store(this.score);
+			this.best_score=this.score;
+			this.newBestScore= true;
+		}
+
+		setTimeout(function() {
+			me.isGameOver=false;
+		},500);
+		this.setBoard();
+	}
+
+	setBoard(): void {
+		
+	}
+
 }
