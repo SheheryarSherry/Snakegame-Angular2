@@ -57,6 +57,23 @@ export class AppComponent implements OnInit {
 	
 
 	ngOnInit() {
+
 	}
+
+	handleKeyboardEvents(e: KeyboardEvent){
+		if(e.keyCode==this.CONTROLS.LEFT&& this.snake.direction!== this.CONTROLS.RIGHT){
+			this.tempDirection=this.CONTROLS.LEFT;
+		}else if (e.keyCode== this.CONTROLS.UP && this.snake.direction !== this.CONTROLS.DOWN){
+			this.tempDirection= this.CONTROLS.UP;
+
+		}else if(e.keyCode == this.CONTROLS.RIGHT && this.snake.direction !== this.CONTROLS.LEFT){
+			this.tempDirection=this.CONTROLS.RIGHT;
+
+		}else if(e.keyCode == this.CONTROLS.DOWN && this.snake.direction !== this.CONTROLS.UP){
+			this.tempDirection= this.CONTROLS.DOWN;
+		}
+	}
+
+	
 
 }
