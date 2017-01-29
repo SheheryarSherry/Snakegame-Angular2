@@ -89,6 +89,22 @@ export class AppComponent implements OnInit {
 
 		return this.COLORS.BOARD;
 	}
+	updatepositions(): void {
+		
+	}
+	repositionHead():any{
+		let newHead=Object.assign({},this.snake.parts[0]);
 
-
+		if(this.tempDirection == this.CONTROLS.LEFT){
+			newHead.x -= 1;
+		}else if (this.tempDirection == this.CONTROLS.RIGHT){
+			newHead.x += 1;
+		}else if (this.tempDirection == this.CONTROLS.UP){
+			newHead.y -= 1;
+		}else if (this.tempDirection == this.CONTROLS.DOWN){
+			newHead.y += 1;
+		}
+		return newHead;
+	}
+	
 }
