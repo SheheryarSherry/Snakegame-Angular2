@@ -60,19 +60,69 @@ export class AppComponent implements OnInit {
 		this.setBoard();
 	}
 
-	handleKeyboardEvents(e: KeyboardEvent){
-		if(e.keyCode==this.CONTROLS.LEFT&& this.snake.direction!== this.CONTROLS.RIGHT){
-			this.tempDirection=this.CONTROLS.LEFT;
-		}else if (e.keyCode== this.CONTROLS.UP && this.snake.direction !== this.CONTROLS.DOWN){
-			this.tempDirection= this.CONTROLS.UP;
+	// handleKeyboardEvents(e: KeyboardEvent){
+	// 	if(e.keyCode==this.CONTROLS.LEFT&& this.snake.direction!== this.CONTROLS.RIGHT){
+	// 		this.tempDirection=this.CONTROLS.LEFT;
+	// 	}else if (e.keyCode== this.CONTROLS.UP && this.snake.direction !== this.CONTROLS.DOWN){
+	// 		this.tempDirection= this.CONTROLS.UP;
 
-		}else if(e.keyCode == this.CONTROLS.RIGHT && this.snake.direction !== this.CONTROLS.LEFT){
-			this.tempDirection=this.CONTROLS.RIGHT;
+	// 	}else if(e.keyCode == this.CONTROLS.RIGHT && this.snake.direction !== this.CONTROLS.LEFT){
+	// 		this.tempDirection=this.CONTROLS.RIGHT;
 
-		}else if(e.keyCode == this.CONTROLS.DOWN && this.snake.direction !== this.CONTROLS.UP){
-			this.tempDirection= this.CONTROLS.DOWN;
-		}
+	// 	}else if(e.keyCode == this.CONTROLS.DOWN && this.snake.direction !== this.CONTROLS.UP){
+	// 		this.tempDirection= this.CONTROLS.DOWN;
+	// 	}
+	// }
+	handleAutomatically(){
+		if(this.snake.parts[0].x==this.fruit.x &&
+		 this.snake.parts[0].y != this.fruit.y &&
+		  this.fruit.y<=this.snake.parts[0].y
+		&& this.snake.direction !== this.CONTROLS.DOWN){
+				this.snake.direction=this.CONTROLS.UP;
+			}
+			else if(this.snake.parts[0].y==this.fruit.y &&
+			 this.snake.parts[0].x != this.fruit.x &&
+			  this.fruit.x<=this.snake.parts[0].x
+			&& this.snake.direction !== this.CONTROLS.RIGHT){
+			
+				this.snake.direction=this.CONTROLS.LEFT;
+			}
+			else if(this.snake.parts[0].x!=this.fruit.x &&
+			 this.snake.parts[0].y != this.fruit.y &&
+			  this.fruit.y<=this.snake.parts[0].y
+			 && this.snake.direction !== this.CONTROLS.DOWN){
+				this.snake.direction=this.CONTROLS.UP;
+			}
+			else if(this.snake.parts[0].y!=this.fruit.y && 
+			this.snake.parts[0].x != this.fruit.x &&
+			 this.fruit.x<=this.snake.parts[0].x 
+			&& this.snake.direction !== this.CONTROLS.RIGHT ){
+			
+				this.snake.direction=this.CONTROLS.LEFT;
+			}
+			else if(this.snake.parts[0].y==this.fruit.y &&
+			 this.snake.parts[0].x != this.fruit.x &&
+			  this.fruit.x>=this.snake.parts[0].x
+			&& this.snake.direction !== this.CONTROLS.LEFT){
+			
+				this.snake.direction=this.CONTROLS.RIGHT;
+			}
+			else if(this.snake.parts[0].x==this.fruit.x && this.snake.parts[0].y != this.fruit.y && this.fruit.y>=this.snake.parts[0].y
+			&& this.snake.direction !== this.CONTROLS.UP){
+			
+				this.snake.direction=this.CONTROLS.DOWN;
+			}
+			else if(this.snake.parts[0].y!=this.fruit.y && this.snake.parts[0].x != this.fruit.x && this.fruit.x>=this.snake.parts[0].x 
+			&& this.snake.direction !== this.CONTROLS.LEFT ){
+			
+				this.snake.direction=this.CONTROLS.RIGHT;
+			}
+			else if(this.snake.parts[0].x!=this.fruit.x && this.snake.parts[0].y != this.fruit.y && this.fruit.y>=this.snake.parts[0].y 
+			&& this.snake.direction !== this.CONTROLS.UP){
+			
+				this.snake.direction=this.CONTROLS.DOWN;
 	}
+}
 	setColors(col:number,row:number): any{
 		if(this.isGameOver){
 			return this.COLORS.GAME_OVER;
@@ -103,24 +153,28 @@ export class AppComponent implements OnInit {
 
 		this.snake.parts.unshift(newHead);
 		this.board[newHead.y][newHead.x] = true;
-
-		this.snake.direction = this.tempDirection;
+		this.handleAutomatically();
+		// this.snake.direction = this.tempDirection;
 
 		setTimeout(function() {
 		me.updatepositions();
 		}, this.interval);
 		
 	}
-	repositionHead():any{
-		let newHead=Object.assign({},this.snake.parts[0]);
+	repositionHead(): any {
+		let newHead = Object.assign({}, this.snake.parts[0]);
 
-		if(this.tempDirection == this.CONTROLS.LEFT){
+		if (this.snake.direction === this.CONTROLS.LEFT) {
+			
 			newHead.x -= 1;
-		}else if (this.tempDirection == this.CONTROLS.RIGHT){
+		} else if (this.snake.direction === this.CONTROLS.RIGHT) {
+		
 			newHead.x += 1;
-		}else if (this.tempDirection == this.CONTROLS.UP){
+		} else if (this.snake.direction === this.CONTROLS.UP) {
+		
 			newHead.y -= 1;
-		}else if (this.tempDirection == this.CONTROLS.DOWN){
+		} else if (this.snake.direction === this.CONTROLS.DOWN) {
+		
 			newHead.y += 1;
 		}
 		return newHead;
