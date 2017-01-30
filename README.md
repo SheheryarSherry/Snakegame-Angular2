@@ -17,7 +17,7 @@ $ npm install -g angular-cli
 Clone this repo in your favourite shell:
 
 ```bash
-$ git clone https://github.com/SamirHodzic/ngx-snake.git
+$ git clone https://github.com/SheheryarSherry/Snakegame-Angular2.git
 ```
 
 Install the npm packages described in the package.json:
