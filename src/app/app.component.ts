@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
 	
 
 	ngOnInit() {
-
+		this.setBoard();
 	}
 
 	handleKeyboardEvents(e: KeyboardEvent){
