@@ -79,6 +79,13 @@ export class AppComponent implements OnInit {
 		  this.fruit.y<=this.snake.parts[0].y
 		&& this.snake.direction !== this.CONTROLS.DOWN){
 				this.snake.direction=this.CONTROLS.UP;
+				if(this.selfcollision(this.repositionHead())){
+					this.snake.direction=this.CONTROLS.RIGHT;
+					if(this.selfcollision(this.repositionHead())){
+						this.snake.direction=this.CONTROLS.LEFT;
+
+					}
+				}
 			}
 			else if(this.snake.parts[0].y==this.fruit.y &&
 			 this.snake.parts[0].x != this.fruit.x &&
@@ -86,12 +93,28 @@ export class AppComponent implements OnInit {
 			&& this.snake.direction !== this.CONTROLS.RIGHT){
 			
 				this.snake.direction=this.CONTROLS.LEFT;
+				if(this.selfcollision(this.repositionHead())){
+					this.snake.direction=this.CONTROLS.UP;
+					if(this.selfcollision(this.repositionHead())){
+						this.snake.direction=this.CONTROLS.DOWN;
+
+					}
+				}
 			}
 			else if(this.snake.parts[0].x!=this.fruit.x &&
 			 this.snake.parts[0].y != this.fruit.y &&
 			  this.fruit.y<=this.snake.parts[0].y
 			 && this.snake.direction !== this.CONTROLS.DOWN){
 				this.snake.direction=this.CONTROLS.UP;
+				if(this.selfcollision(this.repositionHead())){
+					this.snake.direction=this.CONTROLS.RIGHT;
+					if(this.selfcollision(this.repositionHead())){
+						this.snake.direction=this.CONTROLS.LEFT;
+
+					}
+				}
+			// 	 if(this.selfCollision(this.repositionHead())&&this.snake.direction !=this.CONTROLS.LEFT){
+			// this.snake.direction = this.CONTROLS.RIGHT;
 			}
 			else if(this.snake.parts[0].y!=this.fruit.y && 
 			this.snake.parts[0].x != this.fruit.x &&
@@ -99,6 +122,14 @@ export class AppComponent implements OnInit {
 			&& this.snake.direction !== this.CONTROLS.RIGHT ){
 			
 				this.snake.direction=this.CONTROLS.LEFT;
+				if(this.selfcollision(this.repositionHead())){
+					this.snake.direction=this.CONTROLS.UP;
+					if(this.selfcollision(this.repositionHead())){
+						this.snake.direction=this.CONTROLS.DOWN;
+
+					}
+				}
+				
 			}
 			else if(this.snake.parts[0].y==this.fruit.y &&
 			 this.snake.parts[0].x != this.fruit.x &&
@@ -106,22 +137,75 @@ export class AppComponent implements OnInit {
 			&& this.snake.direction !== this.CONTROLS.LEFT){
 			
 				this.snake.direction=this.CONTROLS.RIGHT;
+				if(this.selfcollision(this.repositionHead())){
+					this.snake.direction=this.CONTROLS.DOWN;
+					if(this.selfcollision(this.repositionHead())){
+						this.snake.direction=this.CONTROLS.UP;
+
+					}
+				}
 			}
-			else if(this.snake.parts[0].x==this.fruit.x && this.snake.parts[0].y != this.fruit.y && this.fruit.y>=this.snake.parts[0].y
+			else if(this.snake.parts[0].x==this.fruit.x && 
+			this.snake.parts[0].y != this.fruit.y && this.fruit.y>=this.snake.parts[0].y
 			&& this.snake.direction !== this.CONTROLS.UP){
 			
 				this.snake.direction=this.CONTROLS.DOWN;
+				if(this.selfcollision(this.repositionHead())){
+					this.snake.direction=this.CONTROLS.RIGHT;
+					if(this.selfcollision(this.repositionHead())){
+						this.snake.direction=this.CONTROLS.LEFT;
+
+					}
+				}
 			}
-			else if(this.snake.parts[0].y!=this.fruit.y && this.snake.parts[0].x != this.fruit.x && this.fruit.x>=this.snake.parts[0].x 
+			else if(this.snake.parts[0].y!=this.fruit.y &&
+			 this.snake.parts[0].x != this.fruit.x && this.fruit.x>=this.snake.parts[0].x 
 			&& this.snake.direction !== this.CONTROLS.LEFT ){
 			
 				this.snake.direction=this.CONTROLS.RIGHT;
+				if(this.selfcollision(this.repositionHead())){
+					this.snake.direction=this.CONTROLS.DOWN;
+					if(this.selfcollision(this.repositionHead())){
+						this.snake.direction=this.CONTROLS.UP;
+
+					}
+				}
 			}
-			else if(this.snake.parts[0].x!=this.fruit.x && this.snake.parts[0].y != this.fruit.y && this.fruit.y>=this.snake.parts[0].y 
+			else if(this.snake.parts[0].x!=this.fruit.x &&
+			 this.snake.parts[0].y != this.fruit.y && this.fruit.y>=this.snake.parts[0].y 
 			&& this.snake.direction !== this.CONTROLS.UP){
 			
 				this.snake.direction=this.CONTROLS.DOWN;
-	}
+				if(this.selfcollision(this.repositionHead())){
+					this.snake.direction=this.CONTROLS.RIGHT;
+					if(this.selfcollision(this.repositionHead())){
+						this.snake.direction=this.CONTROLS.LEFT;
+						
+
+					}
+				}
+			}
+			else if(this.snake.parts[0].x==this.fruit.x&&this.snake.parts[0].y<this.fruit.y&&
+			this.snake.direction==this.CONTROLS.DOWN){
+				this.snake.direction=this.CONTROLS.LEFT;
+
+			}
+			else if(this.snake.parts[0].x==this.fruit.x&&this.snake.parts[0].y>this.fruit.y&&
+			this.snake.direction==this.CONTROLS.UP){
+				this.snake.direction=this.CONTROLS.LEFT;
+
+			}
+			else if(this.snake.parts[0].y==this.fruit.y&&this.snake.parts[0].x<this.fruit.x&&
+			this.snake.direction==this.CONTROLS.RIGHT){
+				this.snake.direction=this.CONTROLS.UP;
+
+			}
+			else if(this.snake.parts[0].y==this.fruit.y&&this.snake.parts[0].x>this.fruit.x&&
+			this.snake.direction==this.CONTROLS.LEFT){
+				this.snake.direction=this.CONTROLS.UP;
+				
+
+			}
 }
 	setColors(col:number,row:number): any{
 		if(this.isGameOver){
@@ -142,8 +226,8 @@ export class AppComponent implements OnInit {
 	updatepositions(): void {
 		let newHead = this.repositionHead();
 		let me = this;
-
-		if (this.boardcollision(newHead) || this.selfcollision(newHead)){
+		// || this.selfcollision(newHead)
+		if (this.boardcollision(newHead) ){
 			return this.gameover();
 		}else if (this.fruitcollision(newHead)){
 			this.eatFruit();
@@ -253,7 +337,7 @@ export class AppComponent implements OnInit {
 		this.score = 0;
 		this. tempDirection = this.CONTROLS.LEFT;
 		this.isGameOver = false;
-		this.interval= 150;
+		this.interval= 100;
 		this.snake= {
 			direction: this.CONTROLS.LEFT,
 			parts: []
